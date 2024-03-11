@@ -39,7 +39,7 @@ if (["win32"].includes(process.platform)) {
       expect(actual).to.equal(expected);
     });
 
-    it('should return some stdout when tracingroute in linux using noroot false', () => {
+    it('should return some stdout when tracingroute in windows using noroot false', () => {
       let actual = true;
       let expected = true;
       expect(actual).to.equal(expected);
