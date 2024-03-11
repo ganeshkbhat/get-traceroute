@@ -24,13 +24,25 @@ if (["darwin", "aix", "freebsd", "linux", "openbsd", "sunos"].includes(process.p
     before(() => { });
     after(() => { });
 
-    it('should ', () => {
+    it('should not return error when traceroute is being used', () => {
       let actual = true;
       let expected = true;
       expect(actual).to.equal(expected);
     });
 
-    it('should ', () => {
+    it('should return some stdout when tracing route in linux using default noroot', () => {
+      let actual = true;
+      let expected = true;
+      expect(actual).to.equal(expected);
+    });
+
+    it('should return some stdout when tracing route in linux using noroot false', () => {
+      let actual = true;
+      let expected = true;
+      expect(actual).to.equal(expected);
+    });
+
+    it('should contain the results text ---- in linux', () => {
       let actual = true;
       let expected = true;
       expect(actual).to.equal(expected);

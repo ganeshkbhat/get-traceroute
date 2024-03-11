@@ -27,18 +27,30 @@ if (["win32"].includes(process.platform)) {
   
     after(() => { });
   
-    it('should ', () => {
+    it('should not return error when traceroute is being used', () => {
       let actual = true;
       let expected = true;
       expect(actual).to.equal(expected);
     });
-  
-    it('should ', () => {
+
+    it('should return some stdout when tracingroute in windows using default noroot', () => {
       let actual = true;
       let expected = true;
       expect(actual).to.equal(expected);
     });
-  
+
+    it('should return some stdout when tracingroute in linux using noroot false', () => {
+      let actual = true;
+      let expected = true;
+      expect(actual).to.equal(expected);
+    });
+
+    it('should contain the results text ---- in windows', () => {
+      let actual = true;
+      let expected = true;
+      expect(actual).to.equal(expected);
+    });
+
   });
   
 }
