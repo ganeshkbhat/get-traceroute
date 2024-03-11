@@ -17,6 +17,9 @@
 
 const demos = require("../index");
 
-let result = demos.traceroute("google.com", ["-6"]);
-console.log(result.stdout.toString("utf8"));
+(async () => {
+  let result = await demos.traceroute("google.com", []);
+  console.log(result.stdout.toString());
+})()
+
 

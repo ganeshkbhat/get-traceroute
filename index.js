@@ -16,6 +16,8 @@
 'use strict';
 
 var cp = require('child_process');
+const { platform } = process;
+
 
 function isObject(obj) {
   return obj !== null && obj !== undefined && typeof obj === 'object' && !Array.isArray(obj);
@@ -38,32 +40,38 @@ function normaliseOptions(options) {
   return Object.assign({}, DEFAULTS, options);
 }
 
-function traceroute(hostIP, args = [], options = {}, noroot = true) {
-  options = normaliseOptions(options);
-  let error, stdout, stderr, code, ok;
-  let command = ("win32" === process.platform) ? "cmd /C; " : "sh -c; ";
-  try {
-    error = null
-    stdout = cp.execSync(("win32" === process.platform) ? "tracert" : (!!noroot) ? "tracepath" : "traceroute", [...args, hostIP], options)
-    stderr = ''
-    code = 0
-    ok = true
-  } catch (e) {
-    error = e
-    stdout = e.stdout
-    stderr = e.stderr
-    code = e.status || 1 /* istanbul ignore next */
-    ok = false
-  }
+/**
+ *
+ *
+ * @param {*} hostIP `domain` or `IPV4` or `IPV6`
+ * @param {*} [args=[]] Use the `tracert`, or `tracepath` [`noroot: true`], or `traceroute` [`noroot: false`] arguments
+ * @param {*} [options={}] `default` { encoding: 'utf8', silent: false, stdio: "pipe", cwd: cwd }
+ * @param {boolean} [noroot=true] `true`
+ * @return {*} 
+ */
+async function traceroute(hostIP, args = [], options = {}, noroot = true) {
+  let cmd = platform === "win32" ? "tracert" : (!!noroot) ? "tracepath" : "traceroute";
+  return await cp.spawnSync(cmd, [...args, hostIP], normaliseOptions(options));
+}
 
-  return {
-    error: error,
-    stdout: stdout,
-    stderr: stderr,
-    code: code,
-    ok: ok
-  }
+/**
+ *
+ * 
+ * TraceTCP requires the WinPcap library which can be download below
+ * WinPcap - http://www.winpcap.org/install/default.htm
+ * TraceTCP - https://github.com/SimulatedSimian/tracetcp/releases
+ *
+ * @param {*} hostIP `domain` or `IPV4` or `IPV6`
+ * @param {*} [args=[]] Use the `tracert`, or `tracepath` [`noroot: true`], or `traceroute` [`noroot: false`] arguments
+ * @param {*} [options={}] `default` { encoding: 'utf8', silent: false, stdio: "pipe", cwd: cwd }
+ * @param {boolean} [noroot=true] `true`
+ * @return {*} 
+ */
+async function tcptraceroute(hostIP, args = [], options = {}, noroot = false) {
+  let cmd = platform === "win32" ? "tracetcp" : "sudo tcptraceroute";
+  return await cp.spawnSync(cmd, [...args, hostIP], normaliseOptions(options));
 }
 
 module.exports.traceroute = traceroute;
-module.exports.default = traceroute;
+module.exports.tcptraceroute = tcptraceroute
+module.exports.default = { traceroute, tcptraceroute };
