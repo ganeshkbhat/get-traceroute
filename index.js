@@ -30,7 +30,7 @@ function toBoolean(bool) {
   return !!bool;
 }
 
-function isValidDomain(domainaddress) {
+function isDomain(domainaddress) {
   return isValidDomain(domainaddress)
 }
 
@@ -46,7 +46,7 @@ function normaliseOptions(options) {
   return Object.assign({}, DEFAULTS, options);
 }
 
-function isValidUrl(urlString) {
+function isUrl(urlString) {
   var urlPattern = new RegExp('^(https?:\\/\\/)?' + // validate protocol
     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // validate domain name
     '((\\d{1,3}\\.){3}\\d{1,3}))' + // validate OR ip (v4) address
@@ -62,7 +62,7 @@ function isValidUrl(urlString) {
  * @param {*} urlString
  * @return {*} 
  */
-function isValidDomain(urlString) {
+function isDomain(urlString) {
   var urlPattern = new RegExp('^(https?:\\/\\/)?' + // validate protocol
     '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // validate domain name
     '((\\d{1,3}\\.){3}\\d{1,3}))' + // validate OR ip (v4) address
@@ -133,6 +133,6 @@ module.exports.traceroute = traceroute;
 // module.exports.tcptraceroute = tcptraceroute; 
 module.exports.isIPv4 = isIPv4;
 module.exports.isIPv6 = isIPv6;
-module.exports.isValidDomain = isValidDomain;
-module.exports.isValidUrl = isValidUrl;
-module.exports.default = { traceroute, isIPv4, isIPv6, isValidDomain, isValidUrl };
+module.exports.isDomain = isDomain;
+module.exports.isUrl = isUrl;
+module.exports.default = { traceroute, isIPv4, isIPv6, isDomain, isUrl };
