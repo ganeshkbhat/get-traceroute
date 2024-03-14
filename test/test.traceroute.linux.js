@@ -20,7 +20,7 @@ const demos = require("../index");
 
 if (["darwin", "aix", "freebsd", "linux", "openbsd", "sunos"].includes(process.platform)) {
 
-  describe('[ tests] Tests to ', () => {
+  describe('[ tests] Tests to check if trace route function tracert works right in linux', () => {
     let tst, written, result;
     before(async () => {
       result = await demos.traceroute("google.com", []);
@@ -28,19 +28,20 @@ if (["darwin", "aix", "freebsd", "linux", "openbsd", "sunos"].includes(process.p
 
     after(() => { });
 
-    it('should not return error when traceroute is being used', () => {
+    it('should not return error when trace route is being used', () => {
       let actual = true;
       let expected = true;
       expect(!!result).to.equal(expected);
     });
 
-    it('should return some stdout when tracingroute in linux using default noroot', () => {
-      let actual = true;
-      let expected = true;
-      expect(actual).to.equal(expected);
-    });
+    // it('should return some stdout when tracing route in linux using default noroot', () => {
+    //   let actual = true;
+    //   let expected = true;
+    //   expect(result.stdout.toString().includes("Tracing route to google.com [")).to.equal(expected);
+    //   expect(result.stdout.toString().includes("Trace complete")).to.equal(expected);
+    // });
 
-    it('should return some stdout when tracingroute in linux using noroot false', () => {
+    it('should return some stdout when tracing route in linux using noroot false', () => {
       let actual = true;
       let expected = true;
       expect(actual).to.equal(expected);
@@ -49,7 +50,8 @@ if (["darwin", "aix", "freebsd", "linux", "openbsd", "sunos"].includes(process.p
     it('should contain the results text ---- in linux', () => {
       let actual = true;
       let expected = true;
-      expect(actual).to.equal(expected);
+      expect(result.stdout.toString().includes("Tracing route to google.com [")).to.equal(expected);
+      expect(result.stdout.toString().includes("Trace complete")).to.equal(expected);
     });
 
   });
