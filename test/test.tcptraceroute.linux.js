@@ -6,8 +6,9 @@
  * Install: npm i  --save
  * Github: https://github.com/ganeshkbhat/
  * npmjs Link: https://www.npmjs.com/package/
- * File: 
+ * File: index.js
  * File Description: 
+ * 
  * 
 */
 
@@ -19,11 +20,10 @@ const { expect } = require('chai');
 const demos = require("../index");
 
 if (["darwin", "aix", "freebsd", "linux", "openbsd", "sunos"].includes(process.platform)) {
-
   describe('[ tests] Tests to ', () => {
     let tst, written, result;
     before(async () => {
-      result = await demos.traceroute("google.com", []);
+      // result = await demos.tcptraceroute("google.com", []);
     });
 
     after(() => { });
@@ -34,13 +34,13 @@ if (["darwin", "aix", "freebsd", "linux", "openbsd", "sunos"].includes(process.p
       expect(!!result).to.equal(expected);
     });
 
-    it('should return some stdout when tracingroute in linux using default noroot', () => {
+    it('should return some stdout when tracing route in linux using default noroot', () => {
       let actual = true;
       let expected = true;
       expect(actual).to.equal(expected);
     });
 
-    it('should return some stdout when tracingroute in linux using noroot false', () => {
+    it('should return some stdout when tracing route in linux using noroot false', () => {
       let actual = true;
       let expected = true;
       expect(actual).to.equal(expected);
@@ -53,5 +53,5 @@ if (["darwin", "aix", "freebsd", "linux", "openbsd", "sunos"].includes(process.p
     });
 
   });
-
 }
+

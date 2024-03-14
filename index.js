@@ -17,6 +17,7 @@
 
 const { isIPv4, isIPv6 } = require("net");
 var cp = require('child_process');
+const { pipeline } = require('stream');
 const { platform } = process;
 
 
@@ -108,10 +109,30 @@ async function tcptraceroute(hostIP, args = [], options = {}, noroot = false) {
   return await cp.spawnSync(cmd, [...args, hostIP], normaliseOptions(options));
 }
 
+function downloadWinPcap() {
+  // // https://www.winpcap.org/install/bin/WinPcap_4_1_3.exe
+  // const https = require('node:https');
+  // https.get('https://www.winpcap.org/install/bin/WinPcap_4_1_3.exe', (res) => { 
+  //   console.log('statusCode:', res.statusCode); console.log('headers:', res.headers); console.log('body:', res.body); 
+  // }).on('error', (e) => { console.error(e); });
+}
+
+function downloadTraceTCP() {
+  // // https://github.com/0xcafed00d/tracetcp/releases/download/v1.0.3/tracetcp_v1.0.3.zip
+  // const https = require('node:https');
+  // https.get('https://github.com/0xcafed00d/tracetcp/releases/download/v1.0.3/tracetcp_v1.0.3.zip', (res) => {
+  //   console.log('statusCode:', res.statusCode);
+  //   console.log('headers:', res.headers);
+  //   console.log('body:', res.body);
+  // }).on('error', (e) => {
+  //   console.error(e);
+  // });
+}
+
 module.exports.traceroute = traceroute;
-module.exports.tcptraceroute = tcptraceroute;
+// module.exports.tcptraceroute = tcptraceroute; 
 module.exports.isIPv4 = isIPv4;
 module.exports.isIPv6 = isIPv6;
 module.exports.isValidDomain = isValidDomain;
 module.exports.isValidUrl = isValidUrl;
-module.exports.default = { traceroute, tcptraceroute, isIPv4, isIPv6, isValidDomain, isValidUrl };
+module.exports.default = { traceroute, isIPv4, isIPv6, isValidDomain, isValidUrl };

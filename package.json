@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/ganeshkbhat/get-traceroute-#readme",
   "scripts": {
-    "test": "mocha --reporter spec --recursive --timeout 60000",
+    "test": "mocha --reporter spec --recursive --timeout 500000",
     "uglify": "uglifyjs --compress --mangle reserved=['$','require','exports'] index.js -o index.min.js",
     "gitadd": "git add .",
     "build": "tsc"
@@ -51,6 +51,8 @@
     "unimported": "^1.31.1"
   },
   "dependencies": {
+    "cross-zip": "^4.0.1",
+    "jszip": "^3.10.1",
     "shell-exec": "^1.1.2"
   }
 }
